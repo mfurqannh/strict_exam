@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "199318937184",
+    "project_id": "strict-exam",
+    "storage_bucket": "strict-exam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199318937184:android:a4611c11419990d47bad05",
+        "android_client_info": {
+          "package_name": "com.example.strict_exam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199318937184-kgcemn1l24em0tvjijdiae15hpkpb4d2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuHo5uDWq-4wsCuUyQu2rgbgHUKcBBXyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199318937184-kgcemn1l24em0tvjijdiae15hpkpb4d2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
