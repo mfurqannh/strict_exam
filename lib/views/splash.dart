@@ -31,6 +31,7 @@ class Splash extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextButton(
+                    // ignore: sort_child_properties_last
                     child: const Icon(Icons.arrow_forward),
                     style: TextButton.styleFrom(foregroundColor: Colors.white),
                     onPressed: () {
