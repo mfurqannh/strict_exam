@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:strict_exam/views/masuk.dart';
 
 class Permission extends StatelessWidget {
   const Permission({super.key});
@@ -28,7 +29,15 @@ class Permission extends StatelessWidget {
                 backgroundColor: Colors.green,
                 splashFactory: NoSplash.splashFactory),
             child: const Text("Izinkan"),
-            onPressed: () {},
+            onPressed: () {
+              //nyalakan fitur flutter_dnd
+              //ketika diberi akses, arahkan ke signin
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignIn(),
+                  ));
+            },
           ),
           const Spacer()
         ],
