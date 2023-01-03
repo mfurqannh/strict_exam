@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:strict_exam/views/permission.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class Splash extends StatelessWidget {
+  const Splash({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const PermissionScreen(),
+                            builder: (context) => const Permission(),
                           ));
                     },
                   ))
