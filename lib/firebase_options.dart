@@ -45,7 +45,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDgK4UdIqvMLPP4HXntubtFY0KutY9Z0Qg',
-    appId: '1:199318937184:web:ed6c2335be262a927bad05',
+    appId: '1:199318937184:web:e376a08e1be27c4f7bad05',
     messagingSenderId: '199318937184',
     projectId: 'strict-exam',
     authDomain: 'strict-exam.firebaseapp.com',
@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDuHo5uDWq-4wsCuUyQu2rgbgHUKcBBXyE',
-    appId: '1:199318937184:android:a4611c11419990d47bad05',
+    appId: '1:199318937184:android:e635c5ccff1e82a57bad05',
     messagingSenderId: '199318937184',
     projectId: 'strict-exam',
     storageBucket: 'strict-exam.appspot.com',
@@ -62,7 +62,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBsWnK4zn4x2A-1bkMGiRrwnRFi8NQtkgU',
-    appId: '1:199318937184:ios:5227446428ce38ff7bad05',
+    appId: '1:199318937184:ios:c9f42451890a57db7bad05',
     messagingSenderId: '199318937184',
     projectId: 'strict-exam',
     storageBucket: 'strict-exam.appspot.com',
@@ -72,7 +72,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBsWnK4zn4x2A-1bkMGiRrwnRFi8NQtkgU',
-    appId: '1:199318937184:ios:5227446428ce38ff7bad05',
+    appId: '1:199318937184:ios:c9f42451890a57db7bad05',
     messagingSenderId: '199318937184',
     projectId: 'strict-exam',
     storageBucket: 'strict-exam.appspot.com',
