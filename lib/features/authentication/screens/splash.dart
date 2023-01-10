@@ -38,7 +38,7 @@ class Splash extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Permission(),
+                            builder: (context) => const PermissionScreen(),
                           ));
                     },
                   ))

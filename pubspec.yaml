@@ -20,6 +20,8 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  flutter_dnd: ^0.1.4+1
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

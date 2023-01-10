@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dnd/flutter_dnd.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:strict_exam/features/authentication/screens/masuk.dart';
 
-class Permission extends StatelessWidget {
-  const Permission({super.key});
+class PermissionScreen extends StatelessWidget {
+  const PermissionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +31,22 @@ class Permission extends StatelessWidget {
                 backgroundColor: Colors.green,
                 splashFactory: NoSplash.splashFactory),
             child: const Text("Izinkan"),
-            onPressed: () {
+            onPressed: () async {
               //nyalakan fitur flutter_dnd
+              FlutterDnd.gotoPolicySettings();
+              // final status = Permission.accessNotificationPolicy.status;
+              if (await Permission.accessNotificationPolicy
+                  .request()
+                  .isGranted) {
+                // await FlutterDnd.setInterruptionFilter(FlutterDnd
+                //     .INTERRUPTION_FILTER_NONE); // Turn on DND - All notifications are suppressed.
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignIn(),
+                    ));
+              }
               //ketika diberi akses, arahkan ke signin
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SignIn(),
-                  ));
             },
           ),
           const Spacer()
