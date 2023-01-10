@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:strict_exam/views/daftar.dart';
-import 'package:strict_exam/widgets/widgets.dart';
+import 'package:get/get.dart';
+import 'package:strict_exam/features/authentication/controllers/signup_controller.dart';
+import 'package:strict_exam/features/authentication/models/user_model.dart';
+import 'package:strict_exam/features/authentication/screens/masuk.dart';
+import 'package:strict_exam/common_widgets/widgets.dart';
 
-class SignIn extends StatelessWidget {
-  SignIn({super.key});
+class SignUp extends StatelessWidget {
+  SignUp({super.key});
 
+  final controller = Get.put(SignUpController());
   final _formKey = GlobalKey<FormState>();
-
-  String email = '';
-  String password = '';
+  static const List<String> list = <String>[
+    'XI RPL A',
+    'XI RPL B',
+    'XI RPL C',
+    'XI RPL D'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,35 +30,57 @@ class SignIn extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Spacer(),
+              // const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: TextFormField(
+                  controller: controller.nama,
+                  validator: (value) {
+                    // print("validate");
+                    return value!.isEmpty ? "Masukkan Nama" : null;
+                  },
+                  decoration: const InputDecoration(
+                      labelText: "Nama", hintText: "Nama"),
+                ),
+              ),
+              Obx(() => DropdownButtonFormField<String>(
+                    value: controller.kelas.value,
+                    hint: Text("Kelas"),
+                    isExpanded: true,
+                    onChanged: (String? value) {
+                      controller.setKelas(value!);
+                    },
+                    items: list.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: TextFormField(
+                  controller: controller.email,
                   validator: (value) {
                     // print("validate");
                     return value!.isEmpty ? "Masukkan Email" : null;
                   },
                   decoration: const InputDecoration(
                       labelText: "Email", hintText: "Email"),
-                  onChanged: (value) {
-                    email = value;
-                  },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: TextFormField(
+                  controller: controller.password,
                   validator: (value) {
                     return value!.isEmpty ? "Masukkan Password" : null;
                   },
                   decoration: const InputDecoration(
                       labelText: "Password", hintText: "Password"),
                   obscureText: true,
-                  onChanged: (value) {
-                    password = value;
-                  },
                 ),
               ),
               SizedBox(
@@ -61,10 +90,21 @@ class SignIn extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30))),
                   child: const Text(
-                    "Masuk",
+                    "Daftar",
                     style: TextStyle(fontSize: 16),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      final user = UserModel(
+                          nama: controller.nama.text,
+                          kelas: controller.kelas.value,
+                          email: controller.email.text);
+
+                      SignUpController.instance.createUser(user);
+                      SignUpController.instance.registerUser(
+                          controller.email.text, controller.password.text);
+                    }
+                  },
                 ),
               ),
               Padding(
@@ -73,12 +113,12 @@ class SignIn extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Belum punya akun? ",
+                      "Sudah punya akun? ",
                       style: TextStyle(fontWeight: FontWeight.w300),
                     ),
                     GestureDetector(
                       child: const Text(
-                        "Daftar",
+                        "Masuk",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w400),
                       ),
@@ -86,7 +126,7 @@ class SignIn extends StatelessWidget {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => SignUp())));
+                                builder: ((context) => SignIn())));
                       },
                     ),
                   ],

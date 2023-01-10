@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:strict_exam/views/permission.dart';
+import 'package:strict_exam/features/authentication/screens/permission.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});

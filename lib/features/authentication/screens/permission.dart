@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:strict_exam/views/masuk.dart';
+import 'package:strict_exam/features/authentication/screens/masuk.dart';
 
 class Permission extends StatelessWidget {
   const Permission({super.key});

@@ -1,15 +1,16 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:strict_exam/views/masuk.dart';
-import 'package:strict_exam/widgets/widgets.dart';
+import 'package:get/get.dart';
+import 'package:strict_exam/features/authentication/controllers/signin_controller.dart';
+import 'package:strict_exam/features/authentication/screens/daftar.dart';
+import 'package:strict_exam/common_widgets/widgets.dart';
 
-class SignUp extends StatelessWidget {
-  SignUp({super.key});
+class SignIn extends StatelessWidget {
+  SignIn({super.key});
 
+  final controller = Get.put(SignInController());
   final _formKey = GlobalKey<FormState>();
-
-  final namaController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,25 +25,13 @@ class SignUp extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // const Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: TextFormField(
-                  controller: namaController,
-                  validator: (value) {
-                    // print("validate");
-                    return value!.isEmpty ? "Masukkan Nama" : null;
-                  },
-                  decoration: const InputDecoration(
-                      labelText: "Nama", hintText: "Nama"),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: TextFormField(
-                  controller: emailController,
+                  controller: controller.email,
                   validator: (value) {
                     // print("validate");
                     return value!.isEmpty ? "Masukkan Email" : null;
@@ -54,7 +43,7 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: TextFormField(
-                  controller: passwordController,
+                  controller: controller.password,
                   validator: (value) {
                     return value!.isEmpty ? "Masukkan Password" : null;
                   },
@@ -70,10 +59,13 @@ class SignUp extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30))),
                   child: const Text(
-                    "Daftar",
+                    "Masuk",
                     style: TextStyle(fontSize: 16),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.signInUser(
+                        controller.email.text, controller.password.text);
+                  },
                 ),
               ),
               Padding(
@@ -82,12 +74,12 @@ class SignUp extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Sudah punya akun? ",
+                      "Belum punya akun? ",
                       style: TextStyle(fontWeight: FontWeight.w300),
                     ),
                     GestureDetector(
                       child: const Text(
-                        "Masuk",
+                        "Daftar",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w400),
                       ),
@@ -95,7 +87,7 @@ class SignUp extends StatelessWidget {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => SignIn())));
+                                builder: ((context) => SignUp())));
                       },
                     ),
                   ],
