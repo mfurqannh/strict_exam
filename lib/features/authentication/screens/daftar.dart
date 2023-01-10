@@ -4,6 +4,7 @@ import 'package:strict_exam/features/authentication/controllers/signup_controlle
 import 'package:strict_exam/features/authentication/models/user_model.dart';
 import 'package:strict_exam/features/authentication/screens/masuk.dart';
 import 'package:strict_exam/common_widgets/widgets.dart';
+import 'package:strict_exam/routing/routes.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({super.key});
@@ -47,7 +48,7 @@ class SignUp extends StatelessWidget {
               ),
               Obx(() => DropdownButtonFormField<String>(
                     value: controller.kelas.value,
-                    hint: Text("Kelas"),
+                    hint: const Text("Kelas"),
                     isExpanded: true,
                     onChanged: (String? value) {
                       controller.setKelas(value!);
@@ -123,10 +124,7 @@ class SignUp extends StatelessWidget {
                             fontSize: 15, fontWeight: FontWeight.w400),
                       ),
                       onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => SignIn())));
+                        Get.offNamed(AppRoutes.signin);
                       },
                     ),
                   ],

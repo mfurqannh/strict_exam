@@ -5,6 +5,7 @@ import 'package:strict_exam/features/authentication/screens/masuk.dart';
 import 'package:strict_exam/features/authentication/screens/splash.dart';
 import 'package:strict_exam/features/manage_exams/screens/home.dart';
 import 'package:strict_exam/features/run_exams/screens/home.dart';
+import 'package:strict_exam/routing/routes.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -22,8 +23,8 @@ class AuthenticationRepository extends GetxController {
 
   _setInitialScreen(User? user) {
     user == null
-        ? Get.offAll(() => const Splash())
-        : Get.offAll(() => SignIn());
+        ? Get.offAllNamed(AppRoutes.splashScreen)
+        : Get.offAllNamed(AppRoutes.signin);
   }
 
   Future<void> createUserWithEmailAndPassword(
@@ -31,20 +32,20 @@ class AuthenticationRepository extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      firebaseUser.value != null
-          ? Get.offAll(() => const HomeSiswa())
-          : Get.offAll(() => const Splash());
+      firebaseUser.value != null ? Get.offAllNamed(AppRoutes.homeSiswa) : null;
     } on FirebaseAuthException catch (e) {}
   }
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
     if (email == 'admin@admin.com' && password == 'admin123') {
-      Get.offAll(() => const HomeGuru());
+      Get.offAllNamed(AppRoutes.homeGuru);
     } else {
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        firebaseUser.value != null ? Get.offAll(() => const HomeSiswa()) : null;
+        firebaseUser.value != null
+            ? Get.offAllNamed(AppRoutes.homeSiswa)
+            : null;
       } on FirebaseAuthException catch (e) {}
     }
   }

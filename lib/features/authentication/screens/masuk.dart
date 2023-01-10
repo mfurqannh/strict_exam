@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:strict_exam/features/authentication/controllers/signin_controller.dart';
 import 'package:strict_exam/features/authentication/screens/daftar.dart';
 import 'package:strict_exam/common_widgets/widgets.dart';
+import 'package:strict_exam/routing/routes.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({super.key});
@@ -84,10 +85,7 @@ class SignIn extends StatelessWidget {
                             fontSize: 15, fontWeight: FontWeight.w400),
                       ),
                       onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => SignUp())));
+                        Get.offNamed(AppRoutes.signup);
                       },
                     ),
                   ],

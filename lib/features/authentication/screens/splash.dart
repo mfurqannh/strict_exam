@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:strict_exam/features/authentication/screens/permission.dart';
+import 'package:get/get.dart';
+import 'package:strict_exam/routing/routes.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});
@@ -35,11 +36,7 @@ class Splash extends StatelessWidget {
                     child: const Icon(Icons.arrow_forward),
                     style: TextButton.styleFrom(foregroundColor: Colors.white),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PermissionScreen(),
-                          ));
+                      Get.offNamed(AppRoutes.permissionScreen);
                     },
                   ))
             ],
