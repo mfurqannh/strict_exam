@@ -9,11 +9,7 @@ class UserRepository extends GetxController {
   final _db = FirebaseFirestore.instance;
 
   createUser(UserModel user) async {
-    await _db.collection("Users").add(user.toJson()).whenComplete(() =>
-        Get.snackbar("Berhasil", "Data berhasil disimpan",
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.blue.withOpacity(0.1),
-            colorText: Colors.blue));
+    await _db.collection("Users").add(user.toJson());
   }
 
   Future<UserModel> getUserDetails(String email) async {
@@ -23,7 +19,7 @@ class UserRepository extends GetxController {
     return userData;
   }
 
-  Future<List<UserModel>> getAllUsers(String email) async {
+  Future<List<UserModel>> getAllUsers() async {
     final snapshot = await _db.collection("Users").get();
     final userData =
         snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();

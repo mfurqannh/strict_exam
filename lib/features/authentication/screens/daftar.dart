@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:strict_exam/features/authentication/controllers/signup_controller.dart';
 import 'package:strict_exam/features/authentication/models/user_model.dart';
-import 'package:strict_exam/features/authentication/screens/masuk.dart';
 import 'package:strict_exam/common_widgets/widgets.dart';
 import 'package:strict_exam/routing/routes.dart';
 

@@ -1,10 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:strict_exam/features/authentication/screens/masuk.dart';
-import 'package:strict_exam/features/authentication/screens/splash.dart';
-import 'package:strict_exam/features/manage_exams/screens/home.dart';
-import 'package:strict_exam/features/run_exams/screens/home.dart';
 import 'package:strict_exam/routing/routes.dart';
 
 class AuthenticationRepository extends GetxController {

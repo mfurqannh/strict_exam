@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:strict_exam/features/authentication/controllers/signin_controller.dart';
-import 'package:strict_exam/features/authentication/screens/daftar.dart';
 import 'package:strict_exam/common_widgets/widgets.dart';
 import 'package:strict_exam/routing/routes.dart';
 

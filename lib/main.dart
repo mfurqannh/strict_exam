@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:strict_exam/firebase_options.dart';
 import 'package:strict_exam/repository/authentication_repository/authentication_repository.dart';
-
+import 'package:strict_exam/routing/navigation.dart';
 import 'features/authentication/screens/splash.dart';
 
 void main() {
@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 400),
       home: const Splash(),
+      getPages: AppNavigation.pages,
     );
   }
 }
