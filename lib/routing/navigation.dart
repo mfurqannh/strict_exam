@@ -3,8 +3,10 @@ import 'package:strict_exam/features/authentication/screens/daftar.dart';
 import 'package:strict_exam/features/authentication/screens/masuk.dart';
 import 'package:strict_exam/features/authentication/screens/permission.dart';
 import 'package:strict_exam/features/authentication/screens/splash.dart';
-import 'package:strict_exam/features/exams/controllers/soal_controller.dart';
 import 'package:strict_exam/features/exams/screens/home_guru.dart';
+import 'package:strict_exam/routing/bindings/Home_guru_binding.dart';
+import 'package:strict_exam/routing/bindings/soal_binding.dart';
+import 'package:strict_exam/routing/bindings/home_siswa_binding.dart';
 import 'package:strict_exam/routing/routes.dart';
 
 import '../features/exams/screens/home_siswa.dart';
@@ -17,13 +19,19 @@ class AppNavigation {
         name: AppRoutes.permissionScreen, page: () => const PermissionScreen()),
     GetPage(name: AppRoutes.signin, page: () => SignIn()),
     GetPage(name: AppRoutes.signup, page: () => SignUp()),
-    GetPage(name: AppRoutes.homeSiswa, page: () => HomeSiswa()),
-    GetPage(name: AppRoutes.homeGuru, page: () => const HomeGuru()),
     GetPage(
-        name: AppRoutes.ujian,
-        page: () => const Ujian(),
-        binding: BindingsBuilder(() {
-          Get.put(SoalController());
-        })),
+      name: AppRoutes.homeSiswa,
+      page: () => HomeSiswa(),
+      binding: HomeSiswaBinding(),
+    ),
+    GetPage(
+        name: AppRoutes.homeGuru,
+        page: () => HomeGuru(),
+        binding: HomeBindingGuru()),
+    GetPage(
+      name: AppRoutes.ujian,
+      page: () => Ujian(),
+      binding: SoalBinding(),
+    ),
   ];
 }

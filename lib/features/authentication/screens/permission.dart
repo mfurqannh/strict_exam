@@ -34,7 +34,6 @@ class PermissionScreen extends StatelessWidget {
             child: const Text("Izinkan"),
             onPressed: () async {
               FlutterDnd.gotoPolicySettings();
-
               if (await Permission.accessNotificationPolicy
                   .request()
                   .isGranted) {

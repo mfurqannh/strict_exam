@@ -5,15 +5,23 @@ import 'package:strict_exam/features/exams/models/ujian_model.dart';
 import 'package:strict_exam/repository/ujian_repository/ujian_repository.dart';
 
 class UjianController extends GetxController {
-  // static UjianController get instance => Get.find();
   final _ujianRepo = Get.put(UjianRepository());
+  final ujianData = <UjianModel>[].obs;
 
-  Future<List<UjianModel>> getAllUjian() async {
-    return await _ujianRepo.getUjian();
+  @override
+  void onReady() {
+    getAllUjian();
+    super.onReady();
   }
 
   toDate(Timestamp time) {
     final date = DateFormat('dd-MM-yyyy HH:mm').format(time.toDate());
-    return date.toString();
+    return date;
+  }
+
+  Future<void> getAllUjian() async {
+    final getUjian = await _ujianRepo.getUjian();
+    ujianData.assignAll(getUjian);
+    print(ujianData);
   }
 }

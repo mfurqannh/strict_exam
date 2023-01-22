@@ -19,7 +19,7 @@ class SignUpController extends GetxController {
 
   void registerUser(String email, String password) {
     AuthenticationRepository.instance
-        .createUserWithEmailAndPassword(email, String, password);
+        .createUserWithEmailAndPassword(email, password);
   }
 
   void createUser(UserModel user) {

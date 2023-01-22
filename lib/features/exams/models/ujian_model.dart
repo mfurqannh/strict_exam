@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UjianModel {
-  final String? id;
-  final String judul;
-  final String deskripsi;
-  final int durasi;
-  final Timestamp waktu;
+  String? id;
+  String judul;
+  String deskripsi;
+  int durasi;
+  Timestamp waktu;
+  List<Pertanyaan>? pertanyaan;
 
-  const UjianModel({
+  UjianModel({
     this.id,
     required this.judul,
     required this.deskripsi,
     required this.durasi,
     required this.waktu,
+    this.pertanyaan,
   });
 
   //konversi ke bentuk map
@@ -26,14 +28,57 @@ class UjianModel {
   }
 
   //map user fetced from firebase to UjianModel
-  factory UjianModel.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> document) {
-    final data = document.data()!;
-    return UjianModel(
-        id: document.id,
-        judul: data["Judul"],
-        deskripsi: data["Deskripsi"],
-        durasi: data["Durasi"],
-        waktu: data["Waktu"]);
-  }
+  UjianModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document)
+      : id = document.id,
+        judul = document["Judul"],
+        deskripsi = document["Deskripsi"],
+        durasi = document["Durasi"],
+        waktu = document["Waktu"],
+        pertanyaan = [];
+}
+
+class Pertanyaan {
+  String? id;
+  String pertanyaan;
+  String jawaban;
+  String pilihan1;
+  String pilihan2;
+  String pilihan3;
+  String pilihan4;
+  String pilihan5;
+  String? jawabanSiswa;
+  List<Pilihan> pilihan;
+
+  Pertanyaan(
+      {this.id,
+      required this.pertanyaan,
+      required this.jawaban,
+      required this.pilihan1,
+      required this.pilihan2,
+      required this.pilihan3,
+      required this.pilihan4,
+      required this.pilihan5,
+      required this.pilihan});
+
+  Pertanyaan.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : id = snapshot.id,
+        pertanyaan = snapshot["Pertanyaan"],
+        jawaban = snapshot["Jawaban"],
+        pilihan1 = snapshot["Pilihan1"],
+        pilihan2 = snapshot["Pilihan2"],
+        pilihan3 = snapshot["Pilihan3"],
+        pilihan4 = snapshot["Pilihan4"],
+        pilihan5 = snapshot["Pilihan5"],
+        pilihan = [];
+}
+
+class Pilihan {
+  String? id;
+  String pilihan;
+
+  Pilihan({this.id, required this.pilihan});
+
+  Pilihan.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : id = snapshot.id,
+        pilihan = snapshot["Pilihan"];
 }

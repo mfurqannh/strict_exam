@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:strict_exam/features/authentication/controllers/getuser_controller.dart';
 import 'package:strict_exam/routing/routes.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
+  // static final instance = Get.put(AuthenticationRepository());
+  // final getUserController = Get.put(GetUserController());
 
   //variables
   final _auth = FirebaseAuth.instance;
@@ -23,25 +26,32 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> createUserWithEmailAndPassword(
-      String email, String, password) async {
+      String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser.value != null ? Get.offAllNamed(AppRoutes.homeSiswa) : null;
-    } on FirebaseAuthException catch (e) {}
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
   }
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
-    if (email == 'admin@admin.com' && password == 'admin123') {
+    if (email == 'admin@admin.com' && password == 'password') {
       Get.offAllNamed(AppRoutes.homeGuru);
     } else {
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        firebaseUser.value != null
-            ? Get.offAllNamed(AppRoutes.homeSiswa)
-            : null;
-      } on FirebaseAuthException catch (e) {}
+        // getUserController.getUserData();
+        if (firebaseUser.value != null) {
+          Get.offAllNamed(AppRoutes.homeSiswa);
+        }
+      } on FirebaseAuthException catch (e) {
+        Get.snackbar("Peringatan", "Email atau password salah",
+            snackPosition: SnackPosition.BOTTOM);
+        print(e);
+      }
     }
   }
 

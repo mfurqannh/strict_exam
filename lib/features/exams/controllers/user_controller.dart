@@ -8,14 +8,22 @@ class UserController extends GetxController {
 
   final _authRepo = Get.put(AuthenticationRepository());
   final _userRepo = Get.put(UserRepository());
+  UserModel user = UserModel(nama: "", kelas: "", email: "");
 
-  getUserData() {
+  @override
+  void onReady() {
+    // user = Get.arguments;
+    // getUserData();
+    super.onReady();
+  }
+
+  Future<UserModel> getUserData() async {
     final email = _authRepo.firebaseUser.value?.email;
-    if (email != null) {
-      return _userRepo.getUserDetails(email);
-    } else {
-      Get.snackbar("Error", "Silahkan login untuk melanjutkan");
-    }
+    return await _userRepo.getUserData(email!);
+  }
+
+  Future<Hasil> getHasil(String? idUjian, String? idUser) async {
+    return await _userRepo.getUserHasil(idUjian, idUser);
   }
 
   Future<List<UserModel>> getAllUsers() async {

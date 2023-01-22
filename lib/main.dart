@@ -7,7 +7,7 @@ import 'package:strict_exam/repository/authentication_repository/authentication_
 import 'package:strict_exam/routing/navigation.dart';
 import 'features/authentication/screens/splash.dart';
 
-void main() {
+Future<void> main() async {
   //full screen
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
