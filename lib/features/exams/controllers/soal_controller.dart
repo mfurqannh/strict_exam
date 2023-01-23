@@ -10,6 +10,7 @@ import '../../../repository/ujian_repository/ujian_repository.dart';
 class SoalController extends FullLifeCycleController with FullLifeCycleMixin {
   final _ujianRepo = Get.put(UjianRepository());
   final _userRepo = Get.put(UserRepository());
+
   late UjianModel ujianModel;
   final allSoal = <Pertanyaan>[];
   Rxn<Pertanyaan> soalSekarang = Rxn<Pertanyaan>();
@@ -33,7 +34,7 @@ class SoalController extends FullLifeCycleController with FullLifeCycleMixin {
   @override
   void onReady() {
     super.onReady();
-    final ujianModel = arg[0] as UjianModel;
+    ujianModel = arg[0];
     loadData(ujianModel);
     getDND(FlutterDnd.INTERRUPTION_FILTER_NONE);
     // getStatus();
@@ -90,6 +91,7 @@ class SoalController extends FullLifeCycleController with FullLifeCycleMixin {
     final ujianModel = arg[0] as UjianModel;
     final idUser = arg[1];
     final jumlahSoal = ujianModel.pertanyaan?.length;
+    final siswa = Siswa(idSiswa: idUser);
 
     jawaban.forEach((key, value) {
       final jawab = Jawaban(jawaban: value);
@@ -107,6 +109,7 @@ class SoalController extends FullLifeCycleController with FullLifeCycleMixin {
         Hasil(nilai: num.parse(nilai.toStringAsFixed(2)), status: "Selesai");
 
     _userRepo.saveNilai(idUser, ujianModel, nilaiAkhir);
+    _ujianRepo.addSiswa(ujianModel, siswa);
   }
 
   @override

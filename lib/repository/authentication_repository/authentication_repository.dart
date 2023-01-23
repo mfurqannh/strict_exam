@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:strict_exam/features/authentication/controllers/getuser_controller.dart';
+import 'package:strict_exam/repository/user_repository/user_repository.dart';
 import 'package:strict_exam/routing/routes.dart';
 
 class AuthenticationRepository extends GetxController {
-  static AuthenticationRepository get instance => Get.find();
-  // static final instance = Get.put(AuthenticationRepository());
-  // final getUserController = Get.put(GetUserController());
+  // static AuthenticationRepository get instance => Get.find();
+  // AuthenticationRepository instance = Get.put(AuthenticationRepository());
+  GetUserController getUserController = Get.put(GetUserController());
+  UserRepository userRepo = Get.put(UserRepository());
 
   //variables
   final _auth = FirebaseAuth.instance;
@@ -30,22 +32,28 @@ class AuthenticationRepository extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      firebaseUser.value != null ? Get.offAllNamed(AppRoutes.homeSiswa) : null;
+      if (firebaseUser.value != null) {
+        await getUserController.getUserData(email);
+        Get.offAllNamed(AppRoutes.homeSiswa, arguments: getUserController.user);
+      }
     } on FirebaseAuthException catch (e) {
+      Get.snackbar("Peringatan", "Pastikan data yang dimasukan benar",
+          snackPosition: SnackPosition.BOTTOM);
       print(e);
     }
   }
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
-    if (email == 'admin@admin.com' && password == 'password') {
+    if (email == 'admin' && password == 'admin') {
       Get.offAllNamed(AppRoutes.homeGuru);
     } else {
       try {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
-        // getUserController.getUserData();
         if (firebaseUser.value != null) {
-          Get.offAllNamed(AppRoutes.homeSiswa);
+          await getUserController.getUserData(email);
+          Get.offAllNamed(AppRoutes.homeSiswa,
+              arguments: getUserController.user);
         }
       } on FirebaseAuthException catch (e) {
         Get.snackbar("Peringatan", "Email atau password salah",

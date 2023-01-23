@@ -31,6 +31,12 @@ class UserModel {
         kelas = document["Kelas"],
         email = document["Email"],
         hasil = [];
+
+  UserModel.fromMap(Map<String, dynamic> map)
+      : email = map["Email"],
+        nama = map["Nama"],
+        kelas = map["Kelas"],
+        hasil = [];
 }
 
 class Hasil {
@@ -38,14 +44,9 @@ class Hasil {
   num? nilai;
   List<Aktivitas>? aktivitas;
   List<Jawaban>? jawaban;
-  String status;
+  String? status;
 
-  Hasil(
-      {this.id,
-      this.nilai,
-      this.aktivitas,
-      this.jawaban,
-      this.status = "Belum dikerjakan"});
+  Hasil({this.id, this.nilai, this.aktivitas, this.jawaban, this.status});
 
   toJson() {
     return {

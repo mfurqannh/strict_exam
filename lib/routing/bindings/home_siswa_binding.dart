@@ -7,7 +7,7 @@ import '../../features/exams/controllers/ujian_controller.dart';
 class HomeSiswaBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(UjianController());
-    Get.put(UserController());
+    Get.put(UjianController(), permanent: true);
+    Get.put(UserController(), permanent: true);
   }
 }

@@ -8,12 +8,12 @@ class UserController extends GetxController {
 
   final _authRepo = Get.put(AuthenticationRepository());
   final _userRepo = Get.put(UserRepository());
-  UserModel user = UserModel(nama: "", kelas: "", email: "");
+  var user = UserModel(nama: "", kelas: "", email: "").obs;
+  var hasil = Hasil().obs;
 
   @override
   void onReady() {
-    // user = Get.arguments;
-    // getUserData();
+    user.value = Get.arguments;
     super.onReady();
   }
 
@@ -22,11 +22,15 @@ class UserController extends GetxController {
     return await _userRepo.getUserData(email!);
   }
 
-  Future<Hasil> getHasil(String? idUjian, String? idUser) async {
-    return await _userRepo.getUserHasil(idUjian, idUser);
+  Future<void> getHasil(String? idUjian, String? idUser) async {
+    hasil.value = await _userRepo.getUserHasil(idUjian, idUser);
   }
 
   Future<List<UserModel>> getAllUsers() async {
     return await _userRepo.getAllUsers();
+  }
+
+  Future<void> signOut() async {
+    await _authRepo.logout();
   }
 }

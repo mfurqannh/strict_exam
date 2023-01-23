@@ -1,15 +1,17 @@
 import 'package:get/get.dart';
 import 'package:strict_exam/features/authentication/models/user_model.dart';
-import 'package:strict_exam/repository/authentication_repository/authentication_repository.dart';
 import 'package:strict_exam/repository/user_repository/user_repository.dart';
 
 class GetUserController extends GetxController {
-  final _authRepo = Get.put(AuthenticationRepository());
+  // final _authRepo = Get.put(AuthenticationRepository());
   final _userRepo = Get.put(UserRepository());
-  UserModel user = UserModel(nama: "", kelas: "", email: "");
+  UserModel user = UserModel(nama: "nama", kelas: "kelas", email: "");
+  int i = 0;
 
-  Future<void> getUserData() async {
-    final email = _authRepo.firebaseUser.value?.email;
-    user = await _userRepo.getUserData(email!);
+  Future<void> getUserData(email) async {
+    user = await _userRepo.getUserData(email);
+    i++;
+    print("i = $i");
+    print(user.email);
   }
 }

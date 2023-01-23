@@ -14,18 +14,18 @@ class UjianRepository extends GetxController {
     final soalData =
         snapshot.docs.map((e) => Pertanyaan.fromSnapshot(e)).toList();
     ujianModel.pertanyaan = soalData;
-    for (Pertanyaan _pertanyaan in ujianModel.pertanyaan!) {
+    for (Pertanyaan pertanyaan in ujianModel.pertanyaan!) {
       final QuerySnapshot<Map<String, dynamic>> snapshot = await _db
           .collection("Ujian")
           .doc(ujianModel.id)
           .collection("Pertanyaan")
-          .doc(_pertanyaan.id)
+          .doc(pertanyaan.id)
           .collection("Pilihan")
           .get();
       final pilihan =
           snapshot.docs.map((e) => Pilihan.fromSnapshot(e)).toList();
-      _pertanyaan.pilihan = pilihan;
-      if (_pertanyaan.pilihan != null && _pertanyaan.pilihan.isNotEmpty) {
+      pertanyaan.pilihan = pilihan;
+      if (pertanyaan.pilihan != null && pertanyaan.pilihan.isNotEmpty) {
         if (ujianModel.pertanyaan != null &&
             ujianModel.pertanyaan!.isNotEmpty) {
           return ujianModel.pertanyaan;
@@ -42,6 +42,37 @@ class UjianRepository extends GetxController {
     final snapshot = await _db.collection("Ujian").get();
     final ujianData =
         snapshot.docs.map((e) => UjianModel.fromSnapshot(e)).toList();
+    // for (var element in ujianData) {
+    //   final QuerySnapshot<Map<String, dynamic>> snap = await _db
+    //       .collection("Ujian")
+    //       .doc(element.id)
+    //       .collection("Siswa")
+    //       .get();
+    // }
     return ujianData;
+  }
+
+  addSiswa(UjianModel ujianModel, Siswa siswa) async {
+    await _db
+        .collection("Ujian")
+        .doc(ujianModel.id)
+        .collection("Siswa")
+        .add(siswa.toJson());
+  }
+
+  Future<bool> cekSiswa(UjianModel ujianModel, String idUser) async {
+    final QuerySnapshot<Map<String, dynamic>> snapshot = await _db
+        .collection("Ujian")
+        .doc(ujianModel.id)
+        .collection("Siswa")
+        .get();
+    final siswaData = snapshot.docs.map((e) => Siswa.fromSnapshot(e)).toList();
+    var isEmpty = true;
+    for (var element in siswaData) {
+      if (element.idSiswa == idUser) {
+        isEmpty = false;
+      }
+    }
+    return isEmpty;
   }
 }

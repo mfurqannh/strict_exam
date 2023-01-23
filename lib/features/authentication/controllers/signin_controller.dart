@@ -4,6 +4,7 @@ import 'package:strict_exam/repository/authentication_repository/authentication_
 
 class SignInController extends GetxController {
   static SignInController get instance => Get.find();
+  AuthenticationRepository authRepo = Get.put(AuthenticationRepository());
 
   //textfield controller to get data from textfields
   final email = TextEditingController();
@@ -13,7 +14,6 @@ class SignInController extends GetxController {
   final kelas = "XI RPL A".obs;
 
   void signInUser(String email, String password) {
-    AuthenticationRepository.instance
-        .loginWithEmailAndPassword(email, password);
+    authRepo.loginWithEmailAndPassword(email, password);
   }
 }

@@ -7,6 +7,7 @@ class UjianModel {
   int durasi;
   Timestamp waktu;
   List<Pertanyaan>? pertanyaan;
+  List<Siswa>? siswa;
 
   UjianModel({
     this.id,
@@ -15,6 +16,7 @@ class UjianModel {
     required this.durasi,
     required this.waktu,
     this.pertanyaan,
+    this.siswa,
   });
 
   //konversi ke bentuk map
@@ -34,7 +36,8 @@ class UjianModel {
         deskripsi = document["Deskripsi"],
         durasi = document["Durasi"],
         waktu = document["Waktu"],
-        pertanyaan = [];
+        pertanyaan = [],
+        siswa = [];
 }
 
 class Pertanyaan {
@@ -81,4 +84,19 @@ class Pilihan {
   Pilihan.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot.id,
         pilihan = snapshot["Pilihan"];
+}
+
+class Siswa {
+  String? id;
+  String idSiswa;
+
+  Siswa({this.id, required this.idSiswa});
+
+  toJson() {
+    return {"ID Siswa": idSiswa};
+  }
+
+  Siswa.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : id = snapshot.id,
+        idSiswa = snapshot["ID Siswa"];
 }

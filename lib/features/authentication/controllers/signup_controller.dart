@@ -6,6 +6,8 @@ import 'package:strict_exam/repository/user_repository/user_repository.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
+  AuthenticationRepository authRepo = Get.put(AuthenticationRepository());
+  final userRepoitory = Get.put(UserRepository());
 
   //textfield controller to get data from textfields
   final nama = TextEditingController();
@@ -15,11 +17,8 @@ class SignUpController extends GetxController {
   //dropdown
   final kelas = "XI RPL A".obs;
 
-  final userRepoitory = Get.put(UserRepository());
-
   void registerUser(String email, String password) {
-    AuthenticationRepository.instance
-        .createUserWithEmailAndPassword(email, password);
+    authRepo.createUserWithEmailAndPassword(email, password);
   }
 
   void createUser(UserModel user) {
