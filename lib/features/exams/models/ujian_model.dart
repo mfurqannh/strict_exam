@@ -89,6 +89,7 @@ class Pilihan {
 class Siswa {
   String? id;
   String idSiswa;
+  // num nilai;
 
   Siswa({this.id, required this.idSiswa});
 
@@ -99,4 +100,5 @@ class Siswa {
   Siswa.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot.id,
         idSiswa = snapshot["ID Siswa"];
+  // nilai = snapshot["Nilai"]
 }

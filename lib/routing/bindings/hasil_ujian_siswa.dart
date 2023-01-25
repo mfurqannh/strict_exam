@@ -4,6 +4,6 @@ import 'package:strict_exam/features/exams/controllers/hasil_ujian_controller.da
 class HasilUjianSiswaBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(HasilUjianController());
+    Get.put(HasilUjianSiswaController());
   }
 }

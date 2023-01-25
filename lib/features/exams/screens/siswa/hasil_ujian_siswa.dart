@@ -8,7 +8,7 @@ import '../../models/ujian_model.dart';
 
 class HasilUjianSiswa extends StatelessWidget {
   HasilUjianSiswa({super.key});
-  HasilUjianController hasilUjianController = Get.find();
+  HasilUjianSiswaController hasilUjianController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class HasilUjianSiswa extends StatelessWidget {
       appBar: AppBar(
         title: appBar(context),
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<Hasil>(
           future: hasilUjianController.getHasil(ujianModel.id, idUser),
@@ -31,18 +31,24 @@ class HasilUjianSiswa extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(hasil.status.toString()),
-                    Text(hasil.nilai.toString()),
-                    ElevatedButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        child: Text("Kembali"))
+                    // Text(hasil.status.toString()),
+                    Text(
+                      hasil.nilai.toString(),
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.blue),
+                    ),
+                    // ElevatedButton(
+                    //     onPressed: () {
+                    //       Get.back();
+                    //     },
+                    //     child: Text("Kembali"))
                   ],
                 ),
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text("Anda belum melaksanakan ujian"),
               );
             }

@@ -26,7 +26,7 @@ class SoalController extends FullLifeCycleController with FullLifeCycleMixin {
   DateTime masukdt = DateTime.now();
   Timestamp keluarts = Timestamp.now();
   Timestamp masukts = Timestamp.now();
-  Duration durasiD = Duration(seconds: 0);
+  Duration durasiD = const Duration(seconds: 0);
   int idAktivitas = 1;
   // Rxn<Future<PermissionStatus>> status = Rxn<Future<PermissionStatus>>();
   // var status = PermissionStatus.denied.obs;
@@ -91,7 +91,6 @@ class SoalController extends FullLifeCycleController with FullLifeCycleMixin {
     final ujianModel = arg[0] as UjianModel;
     final idUser = arg[1];
     final jumlahSoal = ujianModel.pertanyaan?.length;
-    final siswa = Siswa(idSiswa: idUser);
 
     jawaban.forEach((key, value) {
       final jawab = Jawaban(jawaban: value);
@@ -107,6 +106,7 @@ class SoalController extends FullLifeCycleController with FullLifeCycleMixin {
     nilai = skor / jumlahSoal! * 100;
     final nilaiAkhir =
         Hasil(nilai: num.parse(nilai.toStringAsFixed(2)), status: "Selesai");
+    final siswa = Siswa(idSiswa: idUser);
 
     _userRepo.saveNilai(idUser, ujianModel, nilaiAkhir);
     _ujianRepo.addSiswa(ujianModel, siswa);
@@ -119,13 +119,8 @@ class SoalController extends FullLifeCycleController with FullLifeCycleMixin {
 
   @override
   void onInactive() {
-    final ujianModel = arg[0] as UjianModel;
-    final idUser = arg[1];
-
     keluarts = Timestamp.now();
     keluardt = keluarts.toDate();
-
-    print(keluardt);
   }
 
   @override

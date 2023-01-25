@@ -37,6 +37,37 @@ class UserRepository extends GetxController {
     return userData;
   }
 
+  Future<UserModel> getUserbyID(String idUser) async {
+    final docRef = _db.collection("Users").doc(idUser);
+    var userData;
+    await docRef.get().then((DocumentSnapshot snapshot) {
+      userData = UserModel(
+          id: snapshot.id,
+          nama: snapshot["Nama"],
+          kelas: snapshot["Kelas"],
+          email: snapshot["Email"]);
+    });
+    return userData;
+
+    // final snapshot = await _db.collection("Users").doc(idUser).get();
+
+    // final userData = UserModel.fromMap(snapshot.data()!);
+    // return userData;
+  }
+
+  Future<List<Aktivitas>> getAktivitas(String? idUser, String? idUjian) async {
+    final snapshot = await _db
+        .collection("Users")
+        .doc(idUser)
+        .collection("Hasil")
+        .doc(idUjian)
+        .collection("Aktivitas")
+        .get();
+    final aktivitas =
+        snapshot.docs.map((e) => Aktivitas.fromSnapshot(e)).toList();
+    return aktivitas;
+  }
+
   saveJawaban(String idUser, UjianModel ujianModel, String idSoal,
       Jawaban jawaban) async {
     await _db

@@ -44,8 +44,18 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
-    if (email == 'admin' && password == 'admin') {
-      Get.offAllNamed(AppRoutes.homeGuru);
+    if (email == 'admin@admin.com') {
+      try {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        if (firebaseUser.value != null) {
+          Get.offAllNamed(AppRoutes.homeGuru);
+        }
+      } on FirebaseAuthException catch (e) {
+        Get.snackbar("Peringatan", "Email atau password salah",
+            snackPosition: SnackPosition.BOTTOM);
+        print(e);
+      }
     } else {
       try {
         await _auth.signInWithEmailAndPassword(

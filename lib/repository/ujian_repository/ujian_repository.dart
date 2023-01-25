@@ -60,7 +60,7 @@ class UjianRepository extends GetxController {
         .add(siswa.toJson());
   }
 
-  Future<bool> cekSiswa(UjianModel ujianModel, String idUser) async {
+  Future<bool> cekSiswa(UjianModel ujianModel, String? idUser) async {
     final QuerySnapshot<Map<String, dynamic>> snapshot = await _db
         .collection("Ujian")
         .doc(ujianModel.id)
@@ -74,5 +74,15 @@ class UjianRepository extends GetxController {
       }
     }
     return isEmpty;
+  }
+
+  Future<List<Siswa>> listSiswa(UjianModel ujianModel) async {
+    final QuerySnapshot<Map<String, dynamic>> snapshot = await _db
+        .collection("Ujian")
+        .doc(ujianModel.id)
+        .collection("Siswa")
+        .get();
+    final siswaData = snapshot.docs.map((e) => Siswa.fromSnapshot(e)).toList();
+    return siswaData;
   }
 }

@@ -13,5 +13,5 @@ abstract class AppRoutes {
   static const sesiUjianGuru = '/sesiUjianGuru';
   static const hasilUjianSiswa = '/hasilUjianSiswa';
   static const hasilUjianGuru = '/hasilUjianGuru';
-  static const detailHasilUjian = '/detailHasilUjian';
+  static const detailHasilUjianGuru = '/detailHasilUjianGuru';
 }

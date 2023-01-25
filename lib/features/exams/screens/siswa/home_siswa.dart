@@ -54,7 +54,7 @@ class HomeSiswa extends StatelessWidget {
                       return FutureBuilder(
                         future: ujianController.cekSiswa(
                             ujianController.ujianData[index],
-                            userController.user.value.id.toString()),
+                            userController.user.value.id),
                         builder: (context, snapshot) {
                           bool? isEmpty = snapshot.data;
                           if (snapshot.connectionState ==

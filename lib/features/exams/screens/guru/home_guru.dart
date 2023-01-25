@@ -27,9 +27,7 @@ class HomeGuru extends StatelessWidget {
                       child: Text(
                         "DAFTAR UJIAN YANG TERSEDIA",
                         style: TextStyle(
-                            // color: Colors.grey,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -37,11 +35,6 @@ class HomeGuru extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: ujianController.ujianData.length,
                     itemBuilder: ((context, index) {
-                      // // var hasil = userController.getHasil(
-                      // //     ujianController.ujianData[index].id,
-                      // //     userdata.id);
-                      // print("status");
-                      // print(hasil);
                       return Column(
                         children: [
                           Material(
@@ -77,12 +70,6 @@ class HomeGuru extends StatelessWidget {
                                         Text(
                                             "${ujianController.ujianData[index].durasi} menit"),
                                       ]),
-                                      // TableRow(children: [
-                                      //   const Text("Status"),
-                                      //   Text(userdata
-                                      //           .hasil?[0].status ??
-                                      //       ""),
-                                      // ]),
                                     ],
                                   ),
                                   Padding(
@@ -101,7 +88,7 @@ class HomeGuru extends StatelessWidget {
                                         ),
                                         onPressed: () {
                                           Get.toNamed(
-                                            AppRoutes.ujian,
+                                            AppRoutes.hasilUjianGuru,
                                             arguments: ujianController
                                                 .ujianData[index],
                                           );
@@ -125,7 +112,7 @@ class HomeGuru extends StatelessWidget {
                   Align(
                       alignment: Alignment.centerRight,
                       child: FloatingActionButton(
-                          child: Icon(Icons.add), onPressed: () {}))
+                          child: const Icon(Icons.add), onPressed: () {}))
                 ],
               ),
             )));

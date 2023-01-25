@@ -26,7 +26,7 @@ class UjianController extends GetxController {
     print(ujianData);
   }
 
-  Future<bool> cekSiswa(UjianModel ujianModel, String idUser) async {
+  Future<bool> cekSiswa(UjianModel ujianModel, String? idUser) async {
     return await _ujianRepo.cekSiswa(ujianModel, idUser);
     // print(isEmpty.value);
 

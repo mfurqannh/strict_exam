@@ -25,7 +25,7 @@ class UserModel {
   }
 
   //map user fetced from firebase to usermodel
-  UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document)
+  UserModel.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> document)
       : id = document.id,
         nama = document["Nama"],
         kelas = document["Kelas"],

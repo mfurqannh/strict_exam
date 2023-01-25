@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 import 'package:strict_exam/common_widgets/widgets.dart';
 import 'package:strict_exam/features/exams/controllers/soal_controller.dart';
 import 'package:strict_exam/routing/routes.dart';
-
-import '../widgets/soal/pilihan_card.dart';
+import '../../widgets/soal/pilihan_card.dart';
 
 // ignore: must_be_immutable
 class Ujian extends StatelessWidget {
@@ -14,7 +13,7 @@ class Ujian extends StatelessWidget {
   SoalController controller = Get.find();
 
   Future<bool> _onWillPop() async {
-    return false; //<-- SEE HERE
+    return false;
   }
 
   @override
@@ -51,11 +50,11 @@ class Ujian extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                         ),
-                        child: Text("Ya"),
+                        child: const Text("Ya"),
                       ),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Selesai",
                     style: TextStyle(color: Colors.white),
                   ))
@@ -70,7 +69,7 @@ class Ujian extends StatelessWidget {
                     children: [
                       Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only(bottom: 20),
                           child: Text(
                               "${controller.noSoal}. ${controller.soalSekarang.value?.pertanyaan ?? ""}")),
                       GetBuilder<SoalController>(
