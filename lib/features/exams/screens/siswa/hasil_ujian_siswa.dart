@@ -27,29 +27,80 @@ class HasilUjianSiswa extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Hasil hasil = snapshot.data as Hasil;
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Text(hasil.status.toString()),
-                    Text(
-                      hasil.nilai.toString(),
+              String? nilai;
+              if (hasil.nilai! % 1 == 0) {
+                nilai = hasil.nilai?.toStringAsFixed(0);
+              } else {
+                nilai = hasil.nilai?.toStringAsFixed(2);
+              }
+              return Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      ujianModel.judul,
                       style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.blue),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                    // ElevatedButton(
-                    //     onPressed: () {
-                    //       Get.back();
-                    //     },
-                    //     child: Text("Kembali"))
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Table(
+                      children: <TableRow>[
+                        TableRow(children: [
+                          const Text("Deskripsi"),
+                          Text(ujianModel.deskripsi),
+                        ]),
+                        TableRow(children: [
+                          const Text("Waktu mulai"),
+                          Text(hasilUjianController
+                              .toDate(ujianModel.waktu.toDate())),
+                        ]),
+                        TableRow(children: [
+                          const Text("Durasi ujian"),
+                          Text("${ujianModel.durasi} menit"),
+                        ]),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 75,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      "Nilai Ujian",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    decoration: const BoxDecoration(
+                        color: Colors.blue, shape: BoxShape.circle),
+                    child: Center(
+                      child: Text(
+                        nilai.toString(),
+                        style: const TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               );
             } else {
               return const Center(
-                child: Text("Anda belum melaksanakan ujian"),
+                child: CircularProgressIndicator(),
               );
             }
           }),

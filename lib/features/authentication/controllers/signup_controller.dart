@@ -13,9 +13,7 @@ class SignUpController extends GetxController {
   final nama = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
-
-  //dropdown
-  final kelas = "XI RPL A".obs;
+  final kelas = TextEditingController();
 
   void registerUser(String email, String password) {
     authRepo.createUserWithEmailAndPassword(email, password);
@@ -23,9 +21,5 @@ class SignUpController extends GetxController {
 
   void createUser(UserModel user) {
     userRepoitory.createUser(user);
-  }
-
-  void setKelas(String value) {
-    kelas.value = value;
   }
 }

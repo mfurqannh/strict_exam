@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dnd/flutter_dnd.dart';
 import 'package:get/get.dart';
 import 'package:strict_exam/common_widgets/widgets.dart';
-import 'package:strict_exam/features/exams/controllers/soal_controller.dart';
+import 'package:strict_exam/features/exams/controllers/ujian_controller.dart';
 import 'package:strict_exam/routing/routes.dart';
 import '../../widgets/soal/pilihan_card.dart';
 
@@ -10,7 +9,7 @@ import '../../widgets/soal/pilihan_card.dart';
 class Ujian extends StatelessWidget {
   Ujian({super.key});
 
-  SoalController controller = Get.find();
+  UjianController controller = Get.find();
 
   Future<bool> _onWillPop() async {
     return false;
@@ -42,9 +41,8 @@ class Ujian extends StatelessWidget {
                       ),
                       confirm: ElevatedButton(
                         onPressed: () {
-                          controller.getDND(FlutterDnd.INTERRUPTION_FILTER_ALL);
                           controller.simpanJawaban();
-                          Get.delete<SoalController>();
+                          Get.delete<UjianController>();
                           Get.offNamed(AppRoutes.homeSiswa);
                         },
                         style: ElevatedButton.styleFrom(
@@ -63,16 +61,52 @@ class Ujian extends StatelessWidget {
           body: Obx(() => Container(
                 padding: const EdgeInsets.all(10),
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.only(top: 25),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(5),
+                              height: 25,
+                              width: 85,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blue),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Text(
+                                "No. Soal ${controller.noSoal}",
+                                style: TextStyle(fontSize: 13),
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(5),
+                              height: 25,
+                              width: 70,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blue),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Text(
+                                controller.time.value,
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(bottom: 20),
                           child: Text(
-                              "${controller.noSoal}. ${controller.soalSekarang.value?.pertanyaan ?? ""}")),
-                      GetBuilder<SoalController>(
+                              controller.soalSekarang.value?.pertanyaan ?? "")),
+                      GetBuilder<UjianController>(
                           id: "list_pilihan",
                           builder: (context) {
                             return Column(
@@ -172,6 +206,9 @@ class Ujian extends StatelessWidget {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 70,
+                      )
                     ],
                   ),
                 ),

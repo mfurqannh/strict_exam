@@ -25,7 +25,7 @@ class DetailHasilUjianGuruController extends GetxController {
   }
 
   toDate(Timestamp time) {
-    final date = DateFormat('dd-MM-yyyy HH:mm').format(time.toDate());
+    final date = DateFormat('HH:mm:ss').format(time.toDate());
     return date;
   }
 }

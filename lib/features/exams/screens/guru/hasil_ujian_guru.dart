@@ -10,10 +10,10 @@ import '../../controllers/hasil_ujian_guru_controller.dart';
 class HasilUjianGuru extends StatelessWidget {
   HasilUjianGuru({super.key});
   HasilUjianGuruController hasilUjianGuruController = Get.find();
+  final ujianModel = Get.arguments as UjianModel;
 
   @override
   Widget build(BuildContext context) {
-    final ujianModel = Get.arguments as UjianModel;
     return Scaffold(
         appBar: AppBar(
           title: appBar(context),
@@ -30,6 +30,7 @@ class HasilUjianGuru extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(10, 8, 10, 15),
                       child: Text(
                         ujianModel.judul,
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
@@ -58,6 +59,18 @@ class HasilUjianGuru extends StatelessWidget {
                     ListView.separated(
                         shrinkWrap: true,
                         itemBuilder: (((context, index) {
+                          String? nilai;
+                          if (siswa.values.elementAt(index).nilai! % 1 == 0) {
+                            nilai = siswa.values
+                                .elementAt(index)
+                                .nilai
+                                ?.toStringAsFixed(0);
+                          } else {
+                            nilai = siswa.values
+                                .elementAt(index)
+                                .nilai
+                                ?.toStringAsFixed(2);
+                          }
                           return InkWell(
                             onTap: () {
                               Get.toNamed(AppRoutes.detailHasilUjianGuru,
@@ -91,10 +104,7 @@ class HasilUjianGuru extends StatelessWidget {
                                               .kelas)),
                                       Align(
                                           alignment: Alignment.center,
-                                          child: Text(siswa.values
-                                              .elementAt(index)
-                                              .nilai
-                                              .toString())),
+                                          child: Text(nilai.toString())),
                                     ])
                                   ],
                                 ),

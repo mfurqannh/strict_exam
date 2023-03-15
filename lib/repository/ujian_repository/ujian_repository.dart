@@ -14,28 +14,28 @@ class UjianRepository extends GetxController {
     final soalData =
         snapshot.docs.map((e) => Pertanyaan.fromSnapshot(e)).toList();
     ujianModel.pertanyaan = soalData;
-    for (Pertanyaan pertanyaan in ujianModel.pertanyaan!) {
-      final QuerySnapshot<Map<String, dynamic>> snapshot = await _db
-          .collection("Ujian")
-          .doc(ujianModel.id)
-          .collection("Pertanyaan")
-          .doc(pertanyaan.id)
-          .collection("Pilihan")
-          .get();
-      final pilihan =
-          snapshot.docs.map((e) => Pilihan.fromSnapshot(e)).toList();
-      pertanyaan.pilihan = pilihan;
-      if (pertanyaan.pilihan != null && pertanyaan.pilihan.isNotEmpty) {
-        if (ujianModel.pertanyaan != null &&
-            ujianModel.pertanyaan!.isNotEmpty) {
-          return ujianModel.pertanyaan;
-        }
-      }
-    }
+    return ujianModel.pertanyaan;
   }
 
-  createUjian(UjianModel ujian) async {
-    await _db.collection("Ujian").add(ujian.toJson());
+  createUjian(UjianModel ujian, String idUjian) async {
+    await _db.collection("Ujian").doc(idUjian).set(ujian.toJson());
+  }
+
+  addPertanyaan(String idUjian, Pertanyaan pertanyaan) async {
+    await _db
+        .collection("Ujian")
+        .doc(idUjian)
+        .collection("Pertanyaan")
+        .add(pertanyaan.toJson());
+  }
+
+  editPertanyaan(String idUjian, String idSoal, Pertanyaan pertanyaan) async {
+    await _db
+        .collection("Ujian")
+        .doc(idUjian)
+        .collection("Pertanyaan")
+        .doc(idSoal)
+        .set(pertanyaan.toJson());
   }
 
   Future<List<UjianModel>> getUjian() async {

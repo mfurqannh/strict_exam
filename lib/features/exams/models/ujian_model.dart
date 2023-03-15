@@ -50,18 +50,29 @@ class Pertanyaan {
   String pilihan4;
   String pilihan5;
   String? jawabanSiswa;
-  List<Pilihan> pilihan;
 
-  Pertanyaan(
-      {this.id,
-      required this.pertanyaan,
-      required this.jawaban,
-      required this.pilihan1,
-      required this.pilihan2,
-      required this.pilihan3,
-      required this.pilihan4,
-      required this.pilihan5,
-      required this.pilihan});
+  Pertanyaan({
+    this.id,
+    required this.pertanyaan,
+    required this.jawaban,
+    required this.pilihan1,
+    required this.pilihan2,
+    required this.pilihan3,
+    required this.pilihan4,
+    required this.pilihan5,
+  });
+
+  toJson() {
+    return {
+      "Pertanyaan": pertanyaan,
+      "Pilihan1": pilihan1,
+      "Pilihan2": pilihan2,
+      "Pilihan3": pilihan3,
+      "Pilihan4": pilihan4,
+      "Pilihan5": pilihan5,
+      "Jawaban": jawaban,
+    };
+  }
 
   Pertanyaan.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot.id,
@@ -71,19 +82,7 @@ class Pertanyaan {
         pilihan2 = snapshot["Pilihan2"],
         pilihan3 = snapshot["Pilihan3"],
         pilihan4 = snapshot["Pilihan4"],
-        pilihan5 = snapshot["Pilihan5"],
-        pilihan = [];
-}
-
-class Pilihan {
-  String? id;
-  String pilihan;
-
-  Pilihan({this.id, required this.pilihan});
-
-  Pilihan.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
-      : id = snapshot.id,
-        pilihan = snapshot["Pilihan"];
+        pilihan5 = snapshot["Pilihan5"];
 }
 
 class Siswa {

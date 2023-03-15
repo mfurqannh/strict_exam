@@ -10,6 +10,8 @@ abstract class AppRoutes {
   static const buatSesi = '/buatSesi';
   static const editSesi = '/editSesi';
   static const buatSoal = '/buatSoal';
+  static const lihatSoal = '/lihatSoal';
+  static const editSoal = '/editSoal';
   static const sesiUjianGuru = '/sesiUjianGuru';
   static const hasilUjianSiswa = '/hasilUjianSiswa';
   static const hasilUjianGuru = '/hasilUjianGuru';

@@ -13,19 +13,7 @@ class Splash extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Spacer(),
-          RichText(
-            text: const TextSpan(
-              text: 'Strict',
-              style: TextStyle(fontSize: 50),
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'Exam',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
-          const Spacer(),
+          Image.asset('assets/images/logos.png'),
           Row(
             children: [
               const Spacer(),

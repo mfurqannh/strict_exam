@@ -11,7 +11,5 @@ class GetUserController extends GetxController {
   Future<void> getUserData(email) async {
     user = await _userRepo.getUserData(email);
     i++;
-    print("i = $i");
-    print(user.email);
   }
 }
